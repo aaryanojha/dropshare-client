@@ -36,7 +36,7 @@ export default function FilePage() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("http://localhost:5000/api/file", {
+      const res = await fetch("https://dropshare-server.onrender.com/api/file", {
         method: "POST",
         body: formData,
       });
@@ -57,7 +57,7 @@ export default function FilePage() {
     if (!retrieveCode.trim()) return;
 
     // 🔥 THIS triggers browser download
-    window.location.href = `http://localhost:5000/api/file/${retrieveCode
+    window.location.href = `https://dropshare-server.onrender.com/api/file/${retrieveCode
       .trim()
       .toLowerCase()}`;
   }

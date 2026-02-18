@@ -69,7 +69,7 @@ export default function LinkPage() {
     setIsSending(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/link", {
+      const res = await fetch("https://dropshare-server.onrender.com/api/link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: cleanUrl }),
@@ -94,7 +94,7 @@ export default function LinkPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/link/${codeToUse}`
+        `https://dropshare-server.onrender.com/api/link/${codeToUse}`
       );
 
       if (!res.ok) throw new Error("Invalid");

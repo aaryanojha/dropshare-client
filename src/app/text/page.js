@@ -31,7 +31,7 @@ export default function TextPage() {
     if (!text.trim()) return;
     setIsSending(true);
     try {
-      const res = await fetch("http://localhost:5000/api/text", {
+      const res = await fetch("https://dropshare-server.onrender.com/api/text", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
@@ -53,7 +53,7 @@ export default function TextPage() {
 
     try {
       // Assuming GET endpoint structure matches: /api/text/:code
-      const res = await fetch(`http://localhost:5000/api/text/${retrieveCode}`);
+      const res = await fetch(`https://dropshare-server.onrender.com/api/text/${retrieveCode}`);
 
       if (!res.ok) throw new Error("Code not found");
 
@@ -66,10 +66,24 @@ export default function TextPage() {
     }
   }
 
-  const copyToClipboard = (txt) => {
+const [copied, setCopied] = useState(false);
+
+const copyToClipboard = (txt) => {
+  if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(txt);
-    alert("Copied to clipboard!");
-  };
+  } else {
+    const textArea = document.createElement("textarea");
+    textArea.value = txt;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+  }
+
+  setCopied(true);
+  setTimeout(() => setCopied(false), 1500);
+};
+
 
   return (
     <main className="main-container">
@@ -129,6 +143,7 @@ export default function TextPage() {
                   📋
                 </button>
               </div>
+              {copied && <span style={{ marginLeft: "8px", color: "green" }}>Copied!</span>}
 
               <p className="hint">
                 Share this code or scan the QR on another device.
