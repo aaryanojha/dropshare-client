@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -15,7 +16,8 @@ function normalizeUrl(input) {
 }
 
 /* ------------------ Page ------------------ */
-export default function LinkPage() {
+function LinkPageInner() {
+
   /* ---------- Send state ---------- */
   const [url, setUrl] = useState("");
   const [generatedCode, setGeneratedCode] = useState("");
@@ -198,5 +200,13 @@ export default function LinkPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function LinkPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LinkPageInner />
+    </Suspense>
   );
 }
