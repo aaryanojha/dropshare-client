@@ -1,11 +1,13 @@
 "use client";
+import { Suspense } from "react";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 
-export default function TextPage() {
+function TextPageInner() {
+
   // Send State
   const [text, setText] = useState("");
   const [generatedCode, setGeneratedCode] = useState("");
@@ -196,5 +198,12 @@ const copyToClipboard = (txt) => {
         </section>
       </div>
     </main>
+  );
+}
+export default function TextPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TextPageInner />
+    </Suspense>
   );
 }
