@@ -1,11 +1,12 @@
 "use client";
+import { Suspense } from "react";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 
-export default function FilePage() {
+function FilePageInner() {
   /* ---------- Upload state ---------- */
   const [file, setFile] = useState(null);
   const [generatedCode, setGeneratedCode] = useState("");
@@ -136,5 +137,12 @@ export default function FilePage() {
         </section>
       </div>
     </main>
+  );
+}
+export default function FilePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FilePageInner />
+    </Suspense>
   );
 }
