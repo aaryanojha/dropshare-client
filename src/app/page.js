@@ -1,66 +1,87 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="main-container">
+      {/* Navbar */}
+      <header className="navbar">
+        <div className="logo">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          DropShare
         </div>
-      </main>
-    </div>
+        <button className="menu-btn" aria-label="Menu">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      {/* Hero */}
+      <section className="hero">
+        <div className="hero-badge">Seamless Transfer</div>
+        <h1>
+          Instantly share <br />
+          <span className="text-gradient">text, links, and files</span>
+        </h1>
+        <p className="hero-sub">
+          No login required. Just drop, share the code, and go.
+        </p>
+      </section>
+
+      {/* Action Cards */}
+      <section className="cards">
+        <div className="card blue">
+          <div className="card-content">
+            <div className="icon-wrapper">📝</div>
+            <h3>Send Text</h3>
+            <p>Paste notes or snippets and get a secure code instantly.</p>
+          </div>
+          {/* Using Link for faster client-side navigation */}
+          <Link href="/text" className="card-action">
+            Share Text &rarr;
+          </Link>
+        </div>
+
+        <div className="card green disabled">
+          <div className="card-content">
+            <div className="icon-wrapper">🔗</div>
+            <h3>Share Link</h3>
+            <p>Shorten long URLs and share them via QR code.</p>
+          </div>
+          <Link href="/link" className="card-action">
+            Share Link &rarr;
+          </Link>
+        </div>
+
+        <div className="card orange disabled">
+          <div className="card-content">
+            <div className="icon-wrapper">📂</div>
+            <h3>Transfer File</h3>
+            <p>P2P file transfer for documents and images.</p>
+          </div>
+          <Link href="/file" className="card-action">
+            Share File &rarr;
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
