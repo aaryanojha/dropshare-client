@@ -1,10 +1,11 @@
 "use client";
 import { Suspense } from "react";
-
+import { Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
+import { useRef } from "react";
 
 function FilePageInner() {
   /* ---------- Upload state ---------- */
@@ -17,6 +18,7 @@ function FilePageInner() {
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
+  const inputRef = useRef(null);
 
   /* ---------- Autofill code from QR ---------- */
   useEffect(() => {
@@ -37,10 +39,13 @@ function FilePageInner() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("https://dropshare-server.onrender.com/api/file", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://dropshare-server.onrender.com/api/file",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       if (!res.ok) throw new Error("Upload failed");
 
@@ -69,7 +74,7 @@ function FilePageInner() {
       {/* Navbar */}
       <header className="navbar">
         <Link href="/" className="logo">
-          ← Back to Home
+          <Home size={24} />
         </Link>
         <div className="badge">File Share</div>
       </header>
@@ -82,11 +87,13 @@ function FilePageInner() {
             <h2>Upload File</h2>
           </div>
 
+          <div className="input-group">
           <input
             type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-
+            multiple
+            className="mm"
+            onChange={(e) => setFiles([...e.target.files])}/>
+          </div>
           <button
             className="btn-primary"
             onClick={handleUpload}
@@ -119,13 +126,15 @@ function FilePageInner() {
             <h2>Download File</h2>
           </div>
 
-          <input
-            placeholder="Enter code"
-            value={retrieveCode}
-            onChange={(e) => setRetrieveCode(e.target.value)}
-          />
+          <div className="input-group">
+            <input
+              placeholder="Enter code"
+              value={retrieveCode}
+              onChange={(e) => setRetrieveCode(e.target.value)}
+            />
+          </div>
 
-          <button className="btn-secondary" onClick={handleDownload}>
+          <button className="btn-primary" onClick={handleDownload}>
             Download
           </button>
 

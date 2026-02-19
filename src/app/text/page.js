@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-
+import { Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -92,17 +92,7 @@ const copyToClipboard = (txt) => {
       {/* Navbar with Back Navigation */}
       <header className="navbar">
         <Link href="/" className="logo">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-          Back to Home
+          <Home size={24} />
         </Link>
         <div className="badge">Text Share</div>
       </header>

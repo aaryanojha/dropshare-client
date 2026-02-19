@@ -19,8 +19,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className="min-h-screen flex flex-col bg-white text-gray-900">
+        
+        <main className="flex-1">
+          {children}
+        </main>
+
+        <footer className="footer">
+          © 2026 DropShare. All rights reserved.
+        </footer>
+
       </body>
     </html>
   );

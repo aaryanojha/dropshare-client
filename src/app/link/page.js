@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-
+import { Home } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -121,11 +121,11 @@ function LinkPageInner() {
     <main className="main-container">
       {/* Navbar */}
       <header className="navbar">
-        <Link href="/" className="logo">
-          ← Back to Home
-        </Link>
-        <div className="badge">Link Share</div>
-      </header>
+  <Link href="/" className="logo">
+    <Home size={24} />
+  </Link>
+  <div className="badge">Link Share</div>
+</header>
 
       <div className="split-grid">
         {/* LEFT: SEND LINK */}
@@ -134,13 +134,14 @@ function LinkPageInner() {
             <div className="icon-badge green-badge">🔗</div>
             <h2>Share a Link</h2>
           </div>
-
+        <div className="input-group">
           <input
             type="text"
             placeholder="google.com or https://example.com"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
+          </div>
 
           <button
             className="btn-primary"

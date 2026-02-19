@@ -26,6 +26,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.footer {
+  padding: 14px 0;
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.03);
+}
+
+
 .main-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -100,6 +111,15 @@ body {
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
+
+.mm {
+  border: none;
+}
+
+.mm::file-selector-button {
+  border: none;
+}
+
 
 .hero h1 {
   font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
@@ -351,12 +371,13 @@ body {
 .split-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
 @media (min-width: 768px) {
   .split-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 24px;
     align-items: start;
   }
 }
@@ -364,63 +385,82 @@ body {
 /* White Card Panels */
 .card-panel {
   background: white;
-  padding: 30px;
-  border-radius: var(--border-radius);
+  padding: 24px;
+  border-radius: 20px;
   box-shadow: var(--card-shadow);
   border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .card-panel {
+    padding: 30px;
+    border-radius: var(--border-radius);
+  }
+}
+
+.card-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
 }
 
 .panel-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
 }
 
 .panel-header h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .panel-header h2 {
+    font-size: 1.25rem;
+  }
 }
 
 /* Badges */
 .icon-badge {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .blue-badge { background: #eff6ff; color: #2563eb; }
 .green-badge { background: #f0fdf4; color: #16a34a; }
 
 .badge {
-    background: #f1f5f9;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
+  background: #f1f5f9;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 /* Inputs & Textareas */
 .styled-textarea {
   width: 100%;
-  min-height: 150px;
-  padding: 16px;
+  min-height: 140px;
+  padding: 14px;
   border-radius: 16px;
   border: 2px solid #e2e8f0;
   background: #f8fafc;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   resize: vertical;
   outline: none;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .styled-textarea:focus {
@@ -428,9 +468,62 @@ body {
   background: white;
 }
 
+/* Input group */
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  font-size: 0.95rem;
+  outline: none;
+  background: #f8fafc;
+  transition: border-color 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--primary-blue);
+  background: white;
+}
+
+.input-group button {
+  min-height: 48px;
+  padding: 0 18px;
+  background: var(--text-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.input-group button:hover {
+  background: #000;
+}
+
+.input-group button:active {
+  transform: scale(0.97);
+}
+
+/* Stack input + button on small screens */
+@media (max-width: 480px) {
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group button {
+    width: 100%;
+  }
+}
+
 /* Buttons */
 .btn-primary {
   width: 100%;
+  min-height: 48px;
   padding: 14px;
   background: var(--text-primary);
   color: white;
@@ -438,7 +531,11 @@ body {
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-primary:disabled {
@@ -451,9 +548,9 @@ body {
   padding: 10px;
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   width: 100%;
 }
 
@@ -461,7 +558,7 @@ body {
   background: #f8fafc;
 }
 
-/* Result Box (Send Side) */
+/* Result Box */
 .result-box {
   background: #f0f9ff;
   border: 1px solid #bae6fd;
@@ -472,7 +569,7 @@ body {
 }
 
 .result-box span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #0369a1;
   text-transform: uppercase;
   font-weight: 600;
@@ -483,15 +580,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin: 10px 0;
+  flex-wrap: wrap;
 }
 
 .code-display h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #0284c7;
   letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+  .code-display h1 {
+    font-size: 2.5rem;
+  }
 }
 
 .code-display button {
@@ -500,13 +604,21 @@ body {
   cursor: pointer;
   font-size: 1.2rem;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 
-.code-display button:hover { opacity: 1; }
+.code-display button:hover {
+  opacity: 1;
+}
+
+.result-box canvas {
+  max-width: 100%;
+  height: auto !important;
+  margin-top: 10px;
+}
 
 .hint {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #64748b;
   margin: 0;
 }
@@ -514,21 +626,21 @@ body {
 /* Retrieval Side */
 .read-only-box {
   background: #f1f5f9;
-  padding: 16px;
+  padding: 14px;
   border-radius: 12px;
-  color: var(--text-primary);
   font-family: monospace;
+  font-size: 0.85rem;
   white-space: pre-wrap;
-  word-break: break-all;
-  max-height: 200px;
+  word-break: break-word;
+  max-height: 180px;
   overflow-y: auto;
   border: 1px solid #cbd5e1;
 }
 
 .retrieved-area label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
@@ -538,11 +650,12 @@ body {
   background: #fef2f2;
   padding: 10px;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-align: center;
 }
 
+/* Animation */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
