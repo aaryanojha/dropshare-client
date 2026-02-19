@@ -18,20 +18,6 @@ export default function Home() {
           </svg>
           DropShare
         </div>
-        <button className="menu-btn" aria-label="Menu">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
       </header>
 
       {/* Hero */}
@@ -42,7 +28,7 @@ export default function Home() {
           <span className="text-gradient">text, links, and files</span>
         </h1>
         <p className="hero-sub">
-          No login required. Just drop, share the code, and go.
+          No login required. Just drop, share, and go.
         </p>
       </section>
 

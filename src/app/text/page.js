@@ -153,7 +153,10 @@ const copyToClipboard = (txt) => {
 
               <div style={{ marginTop: "16px", textAlign: "center" }}>
                 <QRCodeCanvas
-                  value={`http://localhost:3000/text?code=${generatedCode}`}
+                  value={`${
+  process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+}/text?code=${generatedCode}`}
+
                   size={160}
                 />
               </div>
