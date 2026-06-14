@@ -59,14 +59,48 @@ function FilePageInner() {
   }
 
   /* ---------- Download (IMPORTANT) ---------- */
-  function handleDownload() {
-    if (!retrieveCode.trim()) return;
+async function handleDownload() {
+  if (!retrieveCode.trim()) return;
 
-    // 🔥 THIS triggers browser download
-    window.location.href = `https://dropshare-server.onrender.com/api/file/${retrieveCode
-      .trim()
-      .toLowerCase()}`;
+  setIsUploading(true); // You can repurpose this or create a new 'isDownloading' state
+  setError("");
+
+  try {
+    const response = await fetch(
+      `https://dropshare-server.onrender.com/api/file/${retrieveCode.trim().toLowerCase()}`
+    );
+
+    // If the server returns a 404, we catch it here
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Download failed");
+    }
+
+    // Convert response to a Blob
+    const blob = await response.blob();
+    
+    // Create a temporary link element to trigger the download
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    
+    // Try to get filename from Content-Disposition header
+    const disposition = response.headers.get("Content-Disposition");
+    const filename = disposition?.split("filename=")[1]?.replace(/"/g, "") || "downloaded-file";
+    
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Cleanup
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsUploading(false);
   }
+}
 
   /* ---------- UI ---------- */
   return (
@@ -92,8 +126,9 @@ function FilePageInner() {
             type="file"
             multiple
             className="mm"
-            onChange={(e) => setFiles([...e.target.files])}/>
+            onChange={(e) => setFile(e.target.files[0])}/>
           </div>
+          
           <button
             className="btn-primary"
             onClick={handleUpload}
